@@ -9,6 +9,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core:
+  bloc:
+  flutter_bloc:
+  equatable:
+
+  user_repository:
+    path: packages/user_repository
+
 
 dev_dependencies:
   flutter_test:
