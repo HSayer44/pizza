@@ -34,7 +34,7 @@ class _SignInScreenState extends State<SignInScreen> {
           setState(() {
             signInRequired = false;
           });
-        } else if (state is SignInLoading) {
+        } else if (state is SignInProcess) {
           setState(() {
             signInRequired = true;
           });
