@@ -12,7 +12,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final UserRepository _userRepository;
 
   SignInBloc(this._userRepository) : super(SignInInitial()) {
-    on<SignInReuired>((event, emit) async {
+    on<SignInRequired>((event, emit) async {
       emit(SignInProcess());
       try {
         await _userRepository.signIn(event.email, event.password);

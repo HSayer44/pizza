@@ -13,6 +13,7 @@ dependencies:
   bloc:
   flutter_bloc:
   equatable:
+  cupertino_icons:
 
   user_repository:
     path: packages/user_repository
