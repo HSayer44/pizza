@@ -1,4 +1,4 @@
-library user_trpository;
+library user_repository;
 
 export 'src/entities/entities.dart';
 export 'src/models/models.dart';
