@@ -57,26 +57,28 @@ class HomeScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const DetailsScreen(),
+                                builder: (context) => DetailsScreen(state.pizzas[i],),
                               ));
                         },
                         borderRadius: BorderRadius.circular(20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Image.asset('assets/${i + 1}.png'),
+                            Image.network(state.pizzas[i].picture),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 12.0),
                               child: Row(
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30), color: Colors.red.withOpacity(0.6)),
-                                    child: const Padding(
-                                      padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                                        borderRadius: BorderRadius.circular(30),
+                                        color: state.pizzas[i].isVeg ? Colors.green : Colors.red.withOpacity(0.6)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
                                       child: Text(
-                                        'NON-VEG',
-                                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 9),
+                                        state.pizzas[i].isVeg ? 'VEGI' : 'NON-VEG',
+                                        style: const TextStyle(
+                                            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 9),
                                       ),
                                     ),
                                   ),
@@ -84,11 +86,23 @@ class HomeScreen extends StatelessWidget {
                                   Container(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30), color: Colors.green.withOpacity(0.2)),
-                                    child: const Padding(
-                                      padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
                                       child: Text(
-                                        '🌶️ BALANCE',
-                                        style: TextStyle(color: Colors.green, fontWeight: FontWeight.w800, fontSize: 9),
+                                        state.pizzas[i].spicy == 1
+                                            ? '🌶️ BLAND'
+                                            : state.pizzas[i].spicy == 2
+                                                ? "️🌶️ BALANCE"
+                                                : "🌶️ SPICY",
+                                        style:  TextStyle(
+                                          color:   state.pizzas[i].spicy == 1
+                                              ? Colors.green
+                                              : state.pizzas[i].spicy == 2
+                                              ? Colors.orange
+                                              : Colors.redAccent,
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 9,
+                                        ),
                                       ),
                                     ),
                                   )
@@ -96,17 +110,18 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 8),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
                               child: Text(
-                                'Cheesy Marvel',
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                                state.pizzas[i].name,
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 4.0),
                               child: Text(
-                                'Crafting joy: your pizza, your rules, best taste',
+                                // 'Crafting joy: your pizza, your rules, best taste',
+                                state.pizzas[i].description,
                                 style: TextStyle(fontSize: 10, color: Colors.grey.shade700),
                               ),
                             ),
@@ -114,14 +129,14 @@ class HomeScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
                               child: Row(
                                 children: [
-                                  Text('€12.00',
+                                  Text('€${(state.pizzas[i].price - (state.pizzas[i].price * (state.pizzas[i].discount)/100)).toStringAsFixed(2)}',
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: Theme.of(context).colorScheme.primary,
                                         fontWeight: FontWeight.w700,
                                       )),
                                   const SizedBox(width: 5),
-                                  Text('€15.00',
+                                  Text('€${state.pizzas[i].price}.00',
                                       style: TextStyle(
                                         fontSize: 12,
                                         color: Colors.grey.shade500,
@@ -133,7 +148,7 @@ class HomeScreen extends StatelessWidget {
                                   const Expanded(child: SizedBox()),
                                   IconButton(
                                     onPressed: () {},
-                                    icon: const Icon(CupertinoIcons.add_circled_solid),
+                                    icon: const Icon(CupertinoIcons.add_circled_solid, color: Colors.orange,),
                                   ),
                                 ],
                               ),
@@ -144,10 +159,14 @@ class HomeScreen extends StatelessWidget {
                     );
                   },
                 );
-              } else if(state is GetPizzaLoading) {
-                return const Center(child: CircularProgressIndicator(),);
+              } else if (state is GetPizzaLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               } else {
-                return const Center(child: Text('An error has occured...'),);
+                return const Center(
+                  child: Text('An error has occured...'),
+                );
               }
             },
           ),
