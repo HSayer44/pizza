@@ -22,10 +22,10 @@ class MacrosEntity {
 
   static MacrosEntity fromJson(Map<String, dynamic> json) {
     return MacrosEntity(
-      calories: int.parse(json["calories"]),
-      proteins: int.parse(json["proteins"]),
-      fat: int.parse(json["fat"]),
-      carbs: int.parse(json["carbs"]),
+      calories: json["calories"],
+      proteins: json["proteins"],
+      fat: json["fat"],
+      carbs: json["carbs"],
     );
   }
 //
