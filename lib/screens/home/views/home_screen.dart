@@ -122,6 +122,8 @@ class HomeScreen extends StatelessWidget {
                                   color: Colors.grey.shade500,
                                   fontWeight: FontWeight.w700,
                                   decoration: TextDecoration.lineThrough,
+                                  decorationColor: Colors.red,
+                                  decorationThickness: 1.5,
                                 )),
                             const Expanded(child: SizedBox()),
                             IconButton(
