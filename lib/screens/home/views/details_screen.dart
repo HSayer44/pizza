@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pizza/components/macro.dart';
 import 'package:pizza_repository/pizza_repository.dart';
@@ -95,32 +96,37 @@ class DetailsScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 12),
-                    Row(
-                      children: <Widget>[
-                        MacroWidget(
-                          title: 'Calories',
-                          value: pizza.macros.calories,
-                          icon: FontAwesomeIcons.fire,
-                        ),
-                        const SizedBox(width: 10),
-                        MacroWidget(
-                          title: 'Protein',
-                          value: pizza.macros.proteins,
-                          icon: FontAwesomeIcons.dumbbell,
-                        ),
-                        const SizedBox(width: 10),
-                        MacroWidget(
-                          title: 'Fat',
-                          value: pizza.macros.fat,
-                          icon: FontAwesomeIcons.oilCan,
-                        ),
-                        const SizedBox(width: 10),
-                        MacroWidget(
-                          title: 'Carbs',
-                          value: pizza.macros.carbs,
-                          icon: FontAwesomeIcons.breadSlice,
-                        ),
-                      ],
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          MacroWidget(
+                            title: 'Calories',
+                            value: pizza.macros.calories,
+                            icon: FontAwesomeIcons.fire,
+                          ),
+                          const SizedBox(width: 10),
+                          MacroWidget(
+                            title: 'Protein',
+                            value: pizza.macros.proteins,
+                            icon: FontAwesomeIcons.dumbbell,
+                          ),
+                          const SizedBox(width: 10),
+                          MacroWidget(
+                            title: 'Fat',
+                            value: pizza.macros.fat,
+                            icon: FontAwesomeIcons.oilCan,
+                          ),
+                          const SizedBox(width: 10),
+                          MacroWidget(
+                            title: 'Carbs',
+                            value: pizza.macros.carbs,
+                            icon: FontAwesomeIcons.breadSlice,
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 40),
                     SizedBox(
